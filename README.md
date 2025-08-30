@@ -57,6 +57,37 @@ They are init during the creation of a container, they allow to persist and shar
 This volumes are store outside of UnionFS , they allow to persist data even if a container is delete, patch or reload.
 
 
+## First Container 
+
+### Launch my first container 
+
+```
+docker run hello-world
+```
+
+This is our first command with docker CLI ! Thanks this command, the client docker ask to daemon to execute a new container from specific image.
+
+- Docker start by verify if whe have the image locally
+- Docker pull an image from hub into our OS
+- Docker tell us that the download is done 
+- it provide the id of the image 
+- Docker create a container from the downloaded image 
+- Docker daemon execute a specifical command into the configuration file (dockerfile)
+
+### Re-Launch the container 
+
+After relaunch the container, you can see that docker doesn't download an images because we have already the image into our OS.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
