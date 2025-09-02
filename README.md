@@ -78,6 +78,57 @@ This is our first command with docker CLI ! Thanks this command, the client dock
 
 After relaunch the container, you can see that docker doesn't download an images because we have already the image into our OS.
 
+## Differennt step of images build
+
+### Dockerfile format
+
+```
+# Commentaire
+INSTRUCTION arguments
+```
+You can therefore write comments by preceding them with a #.
+
+All instructions, which we will study one by one in the following lessons, are in capital letters.
+
+
+### How image building works
+
+We will now go into detail about image building.
+
+When the Docker daemon executes each instruction, it creates a layer and saves it in a new image if necessary.
+
+As a reminder, a Docker image is a stack of read-only layers that represent the instructions in the Dockerfile.
+
+Exemple: 
+```
+FROM alpine
+RUN apk add --update nodejs
+COPY ./app.js /app/
+CMD [ "node", "/app/app.js" ]
+
+```
+### How caches works
+
+Whenever possible, Docker will reuse cached intermediate images to speed up (often significantly) the build process.
+
+When Docker uses the cache during a build step, you will see the message “Using cache” and the step will be completed instantly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
