@@ -115,12 +115,86 @@ When Docker uses the cache during a build step, you will see the message “Usin
 
 
 
+## The FROM, WORKDIR, RUN, COPY, and ADD instructions
 
 
+### FROM instruction
 
 
+You must use a FROM instruction as the first instruction in all Dockerfiles.
+
+The only exception is that you can
+
+place comments and global arguments with the ARG instruction.
+The FROM instruction allows you to specify the parent image from which you will make the changes specified in your instructions.
+
+### Run instruction
+
+The RUN command executes all commands specified in a new layer above the last intermediate image and then saves the result.
+
+The resulting image will be used for the next command (also called a step).
+
+There are two syntaxes for the RUN command: the shell form and the exec form.
 
 
+#### exec form of RUN
+
+The exec form uses a JSON array of words that will then be interpreted as an instruction.
+
+It allows commands to be executed with executables without necessarily using a shell.
+
+It is mandatory to use double quotes and not single quotes.
+
+```
+RUN ["executable", "param1", "param2"]
+```
+#### shell form of RUN
+
+The shell form allows you to execute one or more commands using a shell, which is sh by default.
+
+It is equivalent to running /bin/sh -c. This allows you to execute the command passed to the -c option using a new non-interactive, non-connected shell.
+```
+RUN echo "Bonjour !"
+```
+
+### ADD instruction 
+The ADD command allows you to copy files, folders, or remote files using URLs and add them to the image's file system.
+
+ADD automatically decompresses local archives passed as sources before copying them to the chosen destination.
+
+```
+ADD SOURCE... DESTINATION
+```
+
+### Copy instruction
+
+The COPY command allows you to copy files and folders and add them to the image's file system.
+
+The syntax rules are the same as for ADD. The differences between COPY and ADD are as follows:
+<ul>
+<li>
+ Unlike ADD, COPY does not accept URLs as sources.
+</li>
+<li>
+ Unlike ADD, COPY does not automatically decompress local archives passed as a source.
+</li></ul>
+
+Note that Docker recommends using COPY because you don't risk unpacking archives without meaning to.
+
+It is therefore recommended to use ADD only when you need the unpacking features or to download sources from URLs.
+
+### WORKDIR instruction
+
+The WORKDIR instruction allows you to change the working directory for all RUN, CMD, ENTRYPOINT, COPY, and ADD instructions.
+
+You can use multiple WORKDIRs in a Dockerfile, in which case each WORKDIR will apply to instructions until the next WORKDIR.
+
+
+For example :
+
+```
+WORKDIR /app
+```
 
 
 
